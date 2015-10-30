@@ -13,7 +13,8 @@ function prli_menu()
 {
   global $prli_options, $prlipro_options;
 
-  $role = 'administrator';
+  $role = 'edit_posts'
+  
   if(isset($prlipro_options->min_role))
     $role = $prlipro_options->min_role;
 	
@@ -26,7 +27,7 @@ function prli_menu()
 
   add_submenu_page('pretty-link', 'Pretty Link | Tools', 'Tools', $role, PRLI_PATH.'/prli-tools.php');
   add_submenu_page('pretty-link', 'Pretty Link | Options', 'Options', $role, PRLI_PATH.'/prli-options.php');
-  add_submenu_page('pretty-link', 'Pretty Link | Pretty Link Pro', 'Pretty Link Pro', $role, PRLI_PATH.'/prli-pro-settings.php');
+  add_submenu_page('pretty-link', 'Pretty Link | Pretty Link Pro', 'Pretty Link Pro', 'manage_options', PRLI_PATH.'/prli-pro-settings.php');
 
   add_action('admin_head-pretty-link/prli-clicks.php', 'prli_reports_admin_header');
   add_action('admin_print_scripts-' . $prli_menu_hook, 'PrliLinksController::load_scripts');
@@ -156,7 +157,7 @@ function prli_dashboard_widget_function() {
 function prli_add_dashboard_widgets() {
   global $current_user;
   get_currentuserinfo();
-  if($current_user->user_level >= 8)
+  if($current_user->user_level >= 7)
   {
     wp_add_dashboard_widget('prli_dashboard_widget', __('Pretty Link Quick Add', 'pretty-link'), 'prli_dashboard_widget_function');   
 
